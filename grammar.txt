@@ -1,0 +1,24 @@
+Sentence  NP VP .
+VP        Verb NP .
+NP        Det Noun .
+NP        NP PP .
+PP        Prep NP .
+Noun    Adj Noun .
+Verb    ate .
+Verb    washed .
+Verb    taught .
+Noun    sandwich .
+Noun    bathtub .
+Noun    professor .
+Noun    dog .
+Adj     messy .
+Adj     boring .
+Adj     bubbly .
+Adj     flat .
+Prep    with .
+Prep    on .
+Prep    under .
+Prep    in .
+Det     the .
+Det     a .
+Det     every .
