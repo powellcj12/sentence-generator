@@ -1,4 +1,4 @@
-#include <iostream>
+#include <iostream>	
 #include "grammar.h"
 
 using namespace std;
@@ -11,7 +11,7 @@ int main()
 	cout << "Please type the name of the grammar file: ";
 	cin >> input;
 
-	myGrammar.create(file);
+	myGrammar.create(input);
 
 	cout << "You may now start conversing with the computer!";
 	cin >> input;
