@@ -5,7 +5,7 @@ using namespace std;
 
 grammar::grammar()
 {
-
+	srand(time(NULL));
 }
 
 grammar::~grammar()
@@ -18,24 +18,89 @@ void grammar::create(string filename)
 	ifstream inFile;
 	inFile.open(filename.c_str(), ifstream::in);
 
-	production temp;
 	string input;
 
 	while(inFile.good())
 	{
-		cin >> temp.nonTerminal >> input;
-		
-		while(input != ".")
-		{
-			temp.symbols.push_back(input);
-			cin >> input;
-		}
+		production temp;
+		inFile >> input;
 
-		g.push_back(temp);
+		if(nonTerminals.count(input) > 0) // non-terminal already in grammar
+		{
+			// find where in the list it is
+			vector<production>::iterator it = g.begin();
+			while((*it).nonTerminal != input)
+				it++;
+
+			vector<string> temp2;
+
+			inFile >> input;
+
+			// add symbols to it
+			while(input != ".")
+			{
+				temp2.push_back(input);
+				inFile >> input;
+			}
+
+			(*it).symbols.push_back(temp2);
+		}
+		else // non-terminal does not exist
+		{
+			temp.nonTerminal = input;
+			nonTerminals.insert(input);
+			vector<string> temp2;
+
+			inFile >> input;
+
+			while(input != ".")
+			{
+				temp2.push_back(input);
+				inFile >> input;
+			}
+
+			temp.symbols.push_back(temp2);
+			g.push_back(temp);
+		}
 	}
+	/*
+	for(int i = 0; i < g.size(); i++)
+	{
+		for(int j = 0; j < g[i].symbols.size(); j++)
+		{
+			cout << g[i].nonTerminal << " ";
+
+			for(int k = 0; k < g[i].symbols[j].size(); k++)
+			{
+				cout << g[i].symbols[j][k] << " ";
+			}
+
+			cout << endl;
+		}
+	}
+	*/
 }
 
 string grammar::derive(string symbol)
 {
-	return "";
+	string ans = "";
+	vector<production>::iterator it = g.begin();
+
+	while((*it).nonTerminal != symbol)
+		it++;
+
+	int index = rand() % (*it).symbols.size();
+	vector<string> prod = (*it).symbols[index]; //if size is 1, result is always 0
+
+	if(nonTerminals.count(prod[0]) > 0) // non-terminal
+	{
+		for(unsigned int i = 0; i < prod.size(); i++)
+		{
+			ans += derive(prod[i]);
+		}
+	}
+	else
+		ans = prod[0] + " ";
+
+	return ans;
 }

@@ -1,11 +1,15 @@
 CC = g++
 CFLAGS = -c -Wall -Wextra
-all: generator
+all: chat
 
-generator: main.o
-	$(CC) main.o -o generator
+chat: chat.o grammar.o
+	$(CC) chat.o grammar.o -o chat
 
-main.o: main.cpp
-	$(CC) $(CFLAGS) main.cpp
+chat.o: chat.cpp
+	$(CC) $(CFLAGS) chat.cpp
+
+grammar.o: grammar.cpp
+	$(CC) $(CFLAGS) grammar.cpp
+
 clean:
-	rm -rf *o generator
+	rm -rf *o chat

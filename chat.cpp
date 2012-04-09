@@ -13,12 +13,12 @@ int main()
 
 	myGrammar.create(input);
 
-	cout << "You may now start conversing with the computer!";
+	cout << "You may now start conversing with the computer!\n";
 	cin >> input;
 
 	while(input != "quit")
 	{
-		myGrammar.derive(input);
+		cout << myGrammar.derive("Sentence") << endl;
 		cin >> input;
 	}
 
