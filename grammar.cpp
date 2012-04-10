@@ -65,8 +65,11 @@ string grammar::derive(string symbol)
 	string ans = "";
 	vector<production>::iterator it = g.begin();
 
-	while((*it).nonTerminal != symbol)
+	while((*it).nonTerminal != symbol && it != g.end())
 		it++;
+
+	if(it == g.end()) //symbol not found
+		return ans; //return empty string
 
 	int index = rand() % (*it).symbols.size();
 	vector<string> prod = (*it).symbols[index]; //if size is 1, result is always 0
