@@ -16,7 +16,6 @@ class grammar
 
 public:
 	grammar();
-	~grammar();
 	void create(string filename);
 	string derive(string symbol);
 private:

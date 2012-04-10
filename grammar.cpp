@@ -8,11 +8,6 @@ grammar::grammar()
 	srand(time(NULL));
 }
 
-grammar::~grammar()
-{
-
-}
-
 void grammar::create(string filename)
 {
 	ifstream inFile;
@@ -63,22 +58,6 @@ void grammar::create(string filename)
 			g.push_back(temp);
 		}
 	}
-	/*
-	for(int i = 0; i < g.size(); i++)
-	{
-		for(int j = 0; j < g[i].symbols.size(); j++)
-		{
-			cout << g[i].nonTerminal << " ";
-
-			for(int k = 0; k < g[i].symbols[j].size(); k++)
-			{
-				cout << g[i].symbols[j][k] << " ";
-			}
-
-			cout << endl;
-		}
-	}
-	*/
 }
 
 string grammar::derive(string symbol)
@@ -95,9 +74,7 @@ string grammar::derive(string symbol)
 	if(nonTerminals.count(prod[0]) > 0) // non-terminal
 	{
 		for(unsigned int i = 0; i < prod.size(); i++)
-		{
 			ans += derive(prod[i]);
-		}
 	}
 	else
 		ans = prod[0] + " ";
